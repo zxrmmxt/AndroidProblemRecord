@@ -9,3 +9,45 @@ public File[] getExternalFilesDirs(String type)方法的意思
 
 如果您的应用支持 Android 4.3 及更低版本，则应使用支持库的静态方法 ContextCompat.getExternalFilesDirs()。这始终会返回一个 File 数组，
 但如果设备搭载的是 Android 4.3 及更低版本，数组中将仅包含主要外部存储的条目。（如果有第二个存储位置，您将无法在 Android 4.3 及更低版本上访问它。）
+
+
+
+
+
+升级完AndroidStudio3.6.1编译项目报错：
+Caused by: org.gradle.api.internal.artifacts.ivyservice.DefaultLenientConfiguration$ArtifactResolveException:
+Could not resolve all artifacts for configuration ':classpath'.
+
+提示错误：Read Time out
+即使开了梯子依然下载超时，我们更换为阿里云的maven库，下载速度会更快一点。
+
+将原来配置:
+buildscript {
+        repositories {
+            google()
+            jcenter()
+        }
+    }
+    allprojects {
+        repositories {
+            google()
+            jcenter()
+        }
+    }
+
+    改为:
+    buildscript {
+            repositories {
+                google()
+                maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+                jcenter()
+            }
+        }
+        allprojects {
+            repositories {
+                google()
+                maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+                jcenter()
+            }
+        }
+
